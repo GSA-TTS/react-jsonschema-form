@@ -1,0 +1,711 @@
+/**
+ * RJSF USWDS Theme - Centralized Style Overrides
+ *
+ * This file contains all CSS/SCSS customizations for the RJSF USWDS theme.
+ *
+ * DESIGN PRINCIPLE:
+ * - Use Truss Works React-USWDS component defaults as baseline
+ * - NO inline styles or className overrides in widgets/templates
+ * - ALL styling changes go here in this centralized file
+ * - Component modifications use uiSchema for behavior only
+ *
+ * USAGE:
+ * 1. Import this file in your application root
+ * 2. Customize variables below before component rendering
+ * 3. Override specific selectors as needed
+ * 4. Never modify widget/template files for styling
+ *
+ * @see https://designsystem.digital.gov/components/
+ * @see https://trussworks.github.io/react-uswds/
+ */
+
+// ============================================================================
+// SECTION 1: USWDS DESIGN TOKENS
+// ============================================================================
+// These variables align with USWDS 3.x design system
+// Override these values to customize the theme globally
+
+// Colors
+$uswds-primary-color: #005ea2;        // Primary action blue
+$uswds-primary-dark: #004080;         // Dark blue hover state
+$uswds-primary-darker: #002d5c;       // Darker blue active state
+$uswds-secondary-color: #e31c3d;      // Error/danger red
+$uswds-secondary-dark: #b3132a;       // Dark red
+$uswds-accent-cool: #07648d;          // Accent color
+$uswds-accent-warm: #c55811;          // Warning orange
+$uswds-success-color: #07a41e;        // Success green
+
+// Neutrals
+$uswds-base-dark: #222222;            // Text color
+$uswds-base-medium: #666666;          // Secondary text
+$uswds-base-light: #f5f5f5;           // Background
+$uswds-border-gray: #d0d0d0;          // Borders
+
+// Spacing (8px base unit)
+$uswds-spacing-xs: 0.25rem;           // 4px
+$uswds-spacing-sm: 0.5rem;            // 8px
+$uswds-spacing-md: 1rem;              // 16px
+$uswds-spacing-lg: 1.5rem;            // 24px
+$uswds-spacing-xl: 2rem;              // 32px
+$uswds-spacing-2xl: 3rem;             // 48px
+
+// Typography
+$uswds-font-family: 'Source Sans Pro', sans-serif;
+$uswds-font-size-base: 1rem;          // 16px
+$uswds-font-size-sm: 0.875rem;        // 14px
+$uswds-font-size-lg: 1.125rem;        // 18px
+$uswds-font-weight-normal: 400;
+$uswds-font-weight-bold: 700;
+$uswds-line-height-base: 1.5;
+
+// Borders & Shadows
+$uswds-border-radius: 2px;
+$uswds-border-width: 1px;
+$uswds-border-width-focus: 2px;
+$uswds-box-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+$uswds-box-shadow-md: 0 3px 6px rgba(0, 0, 0, 0.16);
+
+// Focus State (WCAG AA compliant)
+$uswds-focus-outline-width: 2px;
+$uswds-focus-outline-offset: 2px;
+$uswds-focus-outline-color: #005ea2;
+
+// Touch Target Minimum (Mobile Accessibility)
+$uswds-touch-target-min: 44px;
+
+// ============================================================================
+// SECTION 2: FORM GROUP & LAYOUT
+// ============================================================================
+// Default spacing and layout for form fields
+
+.usa-form-group {
+  margin-bottom: $uswds-spacing-lg;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.usa-label {
+  font-family: $uswds-font-family;
+  font-size: $uswds-font-size-base;
+  font-weight: $uswds-font-weight-bold;
+  color: $uswds-base-dark;
+  margin-bottom: $uswds-spacing-sm;
+  display: block;
+}
+
+.usa-label--required::after {
+  content: '*';
+  color: $uswds-secondary-color;
+  margin-left: $uswds-spacing-xs;
+}
+
+.usa-hint {
+  font-size: $uswds-font-size-sm;
+  color: $uswds-base-medium;
+  margin-top: $uswds-spacing-xs;
+  margin-bottom: $uswds-spacing-sm;
+  display: block;
+}
+
+.usa-error-message {
+  color: $uswds-secondary-color;
+  font-size: $uswds-font-size-sm;
+  font-weight: $uswds-font-weight-bold;
+  margin-top: $uswds-spacing-xs;
+  display: block;
+
+  &::before {
+    content: '✕ ';
+    margin-right: $uswds-spacing-xs;
+  }
+}
+
+// ============================================================================
+// SECTION 3: TEXT INPUTS (TextInput, TextArea, Email, Password, URL)
+// ============================================================================
+// Ensure consistent sizing for all text input types
+
+.usa-input,
+.usa-textarea {
+  font-family: $uswds-font-family;
+  font-size: $uswds-font-size-base;
+  line-height: $uswds-line-height-base;
+  min-height: $uswds-touch-target-min;
+  padding: $uswds-spacing-sm;
+  border: $uswds-border-width solid $uswds-border-gray;
+  border-radius: $uswds-border-radius;
+  color: $uswds-base-dark;
+  background-color: white;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: $uswds-box-shadow-sm;
+  }
+
+  &:focus {
+    outline: $uswds-focus-outline-width solid $uswds-focus-outline-color;
+    outline-offset: $uswds-focus-outline-offset;
+    box-shadow: none;
+  }
+
+  &:disabled {
+    background-color: $uswds-base-light;
+    color: $uswds-base-medium;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $uswds-secondary-color;
+    border-width: $uswds-border-width;
+
+    &:focus {
+      outline-color: $uswds-secondary-color;
+    }
+  }
+}
+
+.usa-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+// ============================================================================
+// SECTION 4: SELECT & COMBOBOX
+// ============================================================================
+
+.usa-select {
+  font-family: $uswds-font-family;
+  font-size: $uswds-font-size-base;
+  min-height: $uswds-touch-target-min;
+  padding: $uswds-spacing-sm;
+  border: $uswds-border-width solid $uswds-border-gray;
+  border-radius: $uswds-border-radius;
+  background-color: white;
+  color: $uswds-base-dark;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: $uswds-box-shadow-sm;
+  }
+
+  &:focus {
+    outline: $uswds-focus-outline-width solid $uswds-focus-outline-color;
+    outline-offset: $uswds-focus-outline-offset;
+  }
+
+  &:disabled {
+    background-color: $uswds-base-light;
+    color: $uswds-base-medium;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $uswds-secondary-color;
+  }
+}
+
+.usa-combobox {
+  font-family: $uswds-font-family;
+}
+
+// ============================================================================
+// SECTION 5: CHECKBOXES & RADIO BUTTONS
+// ============================================================================
+// Ensure minimum touch targets and consistent spacing
+
+.usa-checkbox,
+.usa-radio {
+  margin-bottom: $uswds-spacing-md;
+  display: flex;
+  align-items: flex-start;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Checkbox and Radio groups
+.usa-checkbox-group,
+.usa-radio-group {
+  display: block;
+}
+
+// Inline checkbox/radio group layout
+.usa-checkbox-group--inline,
+.usa-radio-group--inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $uswds-spacing-md;
+}
+
+.usa-checkbox-group--inline .usa-checkbox,
+.usa-radio-group--inline .usa-radio {
+  margin-bottom: 0;
+  margin-right: 0;
+}
+
+.usa-checkbox__input,
+.usa-radio__input {
+  min-width: $uswds-touch-target-min;
+  min-height: $uswds-touch-target-min;
+  margin-top: calc(-1 * $uswds-spacing-sm / 2);
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &:focus {
+    outline: $uswds-focus-outline-width solid $uswds-focus-outline-color;
+    outline-offset: $uswds-focus-outline-offset;
+  }
+}
+
+.usa-checkbox__label,
+.usa-radio__label {
+  display: flex;
+  align-items: center;
+  min-height: $uswds-touch-target-min;
+  margin-left: $uswds-spacing-md;
+  cursor: pointer;
+}
+
+.usa-checkbox__label-text,
+.usa-radio__label-text {
+  font-family: $uswds-font-family;
+  font-size: $uswds-font-size-base;
+  color: $uswds-base-dark;
+  margin-left: $uswds-spacing-sm;
+}
+
+// ============================================================================
+// SECTION 6: FIELDSETS & LEGENDS (for grouped controls)
+// ============================================================================
+// Used for checkbox groups, radio groups, and object fields
+
+.usa-fieldset {
+  border: none;
+  padding: 0;
+  margin-bottom: $uswds-spacing-lg;
+}
+
+.usa-legend {
+  font-family: $uswds-font-family;
+  font-size: $uswds-font-size-base;
+  font-weight: $uswds-font-weight-bold;
+  color: $uswds-base-dark;
+  padding: 0;
+  margin-bottom: $uswds-spacing-md;
+}
+
+// ============================================================================
+// SECTION 7: BUTTONS
+// ============================================================================
+// Submit, secondary, and action buttons
+
+.usa-button {
+  font-family: $uswds-font-family;
+  font-size: $uswds-font-size-base;
+  font-weight: $uswds-font-weight-bold;
+  min-height: $uswds-touch-target-min;
+  min-width: $uswds-touch-target-min;
+  padding: $uswds-spacing-sm $uswds-spacing-lg;
+  border: none;
+  border-radius: $uswds-border-radius;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+
+  // Primary button
+  &:not(.usa-button--secondary):not(.usa-button--outline):not(.usa-button--unstyled) {
+    background-color: $uswds-primary-color;
+    color: white;
+
+    &:hover {
+      background-color: $uswds-primary-dark;
+    }
+
+    &:active {
+      background-color: $uswds-primary-darker;
+    }
+
+    &:focus {
+      outline: $uswds-focus-outline-width solid $uswds-focus-outline-color;
+      outline-offset: $uswds-focus-outline-offset;
+    }
+
+    &:disabled {
+      background-color: $uswds-base-light;
+      color: $uswds-base-medium;
+      cursor: not-allowed;
+    }
+  }
+
+  // Secondary button
+  &.usa-button--secondary {
+    background-color: transparent;
+    color: $uswds-primary-color;
+    border: $uswds-border-width solid $uswds-primary-color;
+
+    &:hover {
+      background-color: rgba($uswds-primary-color, 0.08);
+    }
+
+    &:active {
+      background-color: rgba($uswds-primary-color, 0.15);
+    }
+
+    &:focus {
+      outline: $uswds-focus-outline-width solid $uswds-focus-outline-color;
+      outline-offset: $uswds-focus-outline-offset;
+    }
+
+    &:disabled {
+      border-color: $uswds-base-light;
+      color: $uswds-base-medium;
+      cursor: not-allowed;
+    }
+  }
+
+  // Outline button
+  &.usa-button--outline {
+    background-color: white;
+    color: $uswds-primary-color;
+    border: $uswds-border-width solid $uswds-primary-color;
+
+    &:hover {
+      background-color: rgba($uswds-primary-color, 0.08);
+    }
+
+    &:focus {
+      outline: $uswds-focus-outline-width solid $uswds-focus-outline-color;
+      outline-offset: $uswds-focus-outline-offset;
+    }
+  }
+
+  // Unstyled button (for links)
+  &.usa-button--unstyled {
+    background-color: transparent;
+    color: $uswds-primary-color;
+    padding: 0;
+    min-height: auto;
+    min-width: auto;
+    text-decoration: underline;
+
+    &:hover {
+      color: $uswds-primary-dark;
+    }
+  }
+}
+
+// ============================================================================
+// SECTION 8: ALERTS & ERROR DISPLAY
+// ============================================================================
+
+.usa-alert {
+  padding: $uswds-spacing-md;
+  border-left: 4px solid;
+  border-radius: $uswds-border-radius;
+  margin-bottom: $uswds-spacing-lg;
+
+  &.usa-alert--error {
+    background-color: rgba($uswds-secondary-color, 0.08);
+    border-left-color: $uswds-secondary-color;
+    color: $uswds-base-dark;
+  }
+
+  &.usa-alert--success {
+    background-color: rgba($uswds-success-color, 0.08);
+    border-left-color: $uswds-success-color;
+    color: $uswds-base-dark;
+  }
+
+  &.usa-alert--warning {
+    background-color: rgba($uswds-accent-warm, 0.08);
+    border-left-color: $uswds-accent-warm;
+    color: $uswds-base-dark;
+  }
+
+  &.usa-alert--info {
+    background-color: rgba($uswds-accent-cool, 0.08);
+    border-left-color: $uswds-accent-cool;
+    color: $uswds-base-dark;
+  }
+}
+
+.usa-alert__heading {
+  font-weight: $uswds-font-weight-bold;
+  margin-bottom: $uswds-spacing-sm;
+}
+
+.usa-alert__body {
+  font-size: $uswds-font-size-sm;
+  line-height: $uswds-line-height-base;
+}
+
+// ============================================================================
+// SECTION 9: ARRAY FIELDS (Repeating Sections)
+// ============================================================================
+// Default styling for repeating form sections
+
+.array-field-item {
+  padding: $uswds-spacing-md;
+  margin-bottom: $uswds-spacing-md;
+  border: $uswds-border-width solid $uswds-border-gray;
+  border-radius: $uswds-border-radius;
+  background-color: $uswds-base-light;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .array-item-index {
+    font-size: $uswds-font-size-sm;
+    color: $uswds-base-medium;
+    margin-bottom: $uswds-spacing-md;
+    font-weight: $uswds-font-weight-bold;
+  }
+
+  .array-item-actions {
+    display: flex;
+    gap: $uswds-spacing-sm;
+    margin-top: $uswds-spacing-md;
+    flex-wrap: wrap;
+
+    button {
+      flex-shrink: 0;
+    }
+  }
+}
+
+// ============================================================================
+// SECTION 10: RESPONSIVE DESIGN
+// ============================================================================
+// Mobile-first approach using USWDS breakpoints
+
+// Tablet (640px and up)
+@media screen and (min-width: 640px) {
+  .usa-form-group {
+    margin-bottom: $uswds-spacing-xl;
+  }
+
+  .array-field-item .array-item-actions {
+    flex-wrap: nowrap;
+  }
+}
+
+// Desktop (1024px and up)
+@media screen and (min-width: 1024px) {
+  .usa-form-group {
+    margin-bottom: $uswds-spacing-xl;
+  }
+}
+
+// Large desktop (1200px and up)
+@media screen and (min-width: 1200px) {
+  .usa-fieldset {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $uswds-spacing-lg;
+
+    > .usa-form-group {
+      grid-column: auto;
+    }
+
+    > .usa-form-group.full-width {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+// ============================================================================
+// SECTION 11: ACCESSIBILITY ENHANCEMENTS
+// ============================================================================
+// Additional accessibility improvements beyond USWDS defaults
+
+// Skip to main content (for keyboard navigation)
+.usa-skip-link {
+  position: absolute;
+  left: -999px;
+  top: -999px;
+  z-index: 999;
+
+  &:focus {
+    left: 0;
+    top: 0;
+    background-color: $uswds-primary-color;
+    color: white;
+    padding: $uswds-spacing-md;
+    text-decoration: none;
+  }
+}
+
+// Focus visible (keyboard navigation indicator)
+.usa-focus-visible:focus-visible {
+  outline: $uswds-focus-outline-width solid $uswds-focus-outline-color;
+  outline-offset: $uswds-focus-outline-offset;
+}
+
+// Screen reader only text
+.usa-sr-only {
+  position: absolute;
+  left: -999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+// ============================================================================
+// SECTION 12: UTILITY CLASSES
+// ============================================================================
+// Commonly used utility classes (non-overridable)
+
+.margin-bottom-0 {
+  margin-bottom: 0 !important;
+}
+
+.margin-bottom-1 {
+  margin-bottom: $uswds-spacing-xs !important;
+}
+
+.margin-bottom-2 {
+  margin-bottom: $uswds-spacing-sm !important;
+}
+
+.margin-bottom-3 {
+  margin-bottom: $uswds-spacing-md !important;
+}
+
+.margin-bottom-4 {
+  margin-bottom: $uswds-spacing-lg !important;
+}
+
+.margin-bottom-5 {
+  margin-bottom: $uswds-spacing-xl !important;
+}
+
+.margin-top-0 {
+  margin-top: 0 !important;
+}
+
+.margin-top-2 {
+  margin-top: $uswds-spacing-sm !important;
+}
+
+.margin-top-3 {
+  margin-top: $uswds-spacing-md !important;
+}
+
+.display-flex {
+  display: flex !important;
+}
+
+.gap-1 {
+  gap: $uswds-spacing-xs !important;
+}
+
+.gap-2 {
+  gap: $uswds-spacing-sm !important;
+}
+
+.gap-3 {
+  gap: $uswds-spacing-md !important;
+}
+
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+// ============================================================================
+// SECTION 13: CUSTOM COMPONENT STYLING
+// ============================================================================
+// Add custom styling below this line
+
+// Example: Customize character count styling
+.character-count {
+  font-size: $uswds-font-size-sm;
+  color: $uswds-base-medium;
+  margin-top: $uswds-spacing-xs;
+}
+
+.character-count--warning {
+  color: $uswds-accent-warm;
+  font-weight: $uswds-font-weight-bold;
+}
+
+.character-count--critical {
+  color: $uswds-secondary-color;
+  font-weight: $uswds-font-weight-bold;
+}
+
+// Example: Custom date input styling
+.usa-date-input {
+  display: flex;
+  gap: $uswds-spacing-sm;
+  flex-wrap: wrap;
+}
+
+// Example: Custom form summary styling
+.form-summary {
+  background-color: $uswds-base-light;
+  padding: $uswds-spacing-lg;
+  border-left: 4px solid $uswds-primary-color;
+  margin-bottom: $uswds-spacing-lg;
+}
+
+.form-summary__item {
+  margin-bottom: $uswds-spacing-md;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.form-summary__label {
+  font-weight: $uswds-font-weight-bold;
+  color: $uswds-base-medium;
+  font-size: $uswds-font-size-sm;
+}
+
+.form-summary__value {
+  color: $uswds-base-dark;
+  margin-top: $uswds-spacing-xs;
+  word-break: break-word;
+}
+
+// ============================================================================
+// Hidden and Additional Field Styling
+// ============================================================================
+
+// Hidden fields should not be displayed
+.rjsf-field-hidden {
+  display: none;
+}
+
+// Additional property template styling
+.form-additional {
+  margin-bottom: $uswds-spacing-lg;
+  padding: $uswds-spacing-md;
+  border: $uswds-border-width solid $uswds-border-gray;
+  border-radius: $uswds-border-radius;
+  background-color: $uswds-base-light;
+}
+
+// Remove button styling for additional properties
+.rjsf-remove-button {
+  margin-top: $uswds-spacing-lg;
+  min-height: $uswds-touch-target-min;
+
+  &:focus {
+    outline: $uswds-focus-outline-width solid $uswds-focus-outline-color;
+    outline-offset: $uswds-focus-outline-offset;
+  }
+}

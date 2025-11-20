@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`USWDS Widget CSS and Structure Parity renders CheckboxWidget with correct class and spacing 1`] = `
+<div>
+  <div
+    class="usa-checkbox margin-bottom-2"
+    data-testid="checkbox"
+  >
+    <input
+      checked=""
+      class="usa-checkbox__input"
+      id="checkbox-test"
+      name="checkbox-test"
+      required=""
+      type="checkbox"
+    />
+    <label
+      class="usa-checkbox__label"
+      for="checkbox-test"
+    >
+      Test Checkbox
+    </label>
+  </div>
+</div>
+`;
+
+exports[`USWDS Widget CSS and Structure Parity renders FieldTemplate with H1 for root title 1`] = `
+<div>
+  <div
+    class=""
+  >
+    <div
+      class="usa-form-group"
+      data-testid="formGroup"
+    >
+      <h1
+        class="usa-label margin-top-0"
+        id="root__title"
+      >
+        Root Title
+        <span
+          class="usa-label--required"
+        >
+          *
+        </span>
+      </h1>
+      <div>
+        Child
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`USWDS Widget CSS and Structure Parity renders RadioWidget with correct class and spacing 1`] = `
+<div>
+  <div
+    class="usa-radio-group"
+    id="radio-test"
+  >
+    <div
+      class="usa-radio margin-bottom-2"
+      data-testid="radio"
+    >
+      <input
+        checked=""
+        class="usa-radio__input"
+        id="radio-test_0"
+        name="radio-test"
+        required=""
+        type="radio"
+        value="a"
+      />
+      <label
+        class="usa-radio__label"
+        for="radio-test_0"
+      >
+        A
+      </label>
+    </div>
+    <div
+      class="usa-radio margin-bottom-2"
+      data-testid="radio"
+    >
+      <input
+        class="usa-radio__input"
+        id="radio-test_1"
+        name="radio-test"
+        required=""
+        type="radio"
+        value="b"
+      />
+      <label
+        class="usa-radio__label"
+        for="radio-test_1"
+      >
+        B
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`USWDS Widget CSS and Structure Parity renders RangeWidget with correct value and structure 1`] = `
+<div>
+  <div
+    class="field-range-wrapper"
+  >
+    <input
+      aria-labelledby="range-test__title"
+      aria-valuetext="50  of 100"
+      class="usa-range"
+      data-testid="range"
+      id="range-test"
+      max="100"
+      min="0"
+      name="range-test"
+      type="range"
+      value="50"
+    />
+    <span
+      class="range-view-value"
+    >
+      50
+    </span>
+     
+  </div>
+</div>
+`;

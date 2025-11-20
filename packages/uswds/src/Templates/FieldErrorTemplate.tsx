@@ -1,0 +1,33 @@
+import { FieldErrorProps, FormContextType, RJSFSchema, StrictRJSFSchema } from '@rjsf/utils';
+import { ErrorMessage } from '@trussworks/react-uswds';
+
+/** The `FieldErrorTemplate` component renders the errors local to the particular field
+ *
+ * @param props - The `FieldErrorProps` for the errors being rendered
+ */
+export default function FieldErrorTemplate<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: FieldErrorProps<T, S, F>) {
+  const { errors = [], idSchema } = props;
+
+  if (errors.length === 0) {
+    return null;
+  }
+  const id = `${idSchema.$id}__error`;
+
+  return (
+    <>
+      {errors
+        .filter((elem) => !!elem)
+        .map((error, index: number) => {
+          return (
+            <ErrorMessage key={index} id={index === 0 ? id : undefined}>
+              {error}
+            </ErrorMessage>
+          );
+        })}
+    </>
+  );
+}

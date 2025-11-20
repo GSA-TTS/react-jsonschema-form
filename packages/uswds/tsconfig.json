@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@rjsf/core/test/*": ["../core/test/*"],
+      "@rjsf/snapshot/test/*": ["../snapshot/test/*"]
+    },
+    "jsx": "react-jsx",
+    "composite": true
+  },
+  "include": ["src", "test"],
+  "references": [
+    {
+      "path": "../core"
+    },
+    {
+      "path": "../snapshot-tests"
+    }
+  ]
+}
